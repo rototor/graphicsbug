@@ -44,6 +44,11 @@ public class LineRenderBug {
 						g.setStroke(thindashed);
 						int y = (int) (globalDashPhase % height);
 						g.drawLine(0, y, width, y);
+
+						x = (int) (Math.random()*width);
+						y = (int) (Math.random()*height);
+						g.drawLine(0, y, width, y);
+						g.drawLine(x, 0, x, height);
 					}
 				}, BorderLayout.CENTER);
 		Timer timer = new Timer(10, (e) -> frame.repaint());
