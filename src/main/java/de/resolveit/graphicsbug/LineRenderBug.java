@@ -19,13 +19,14 @@ public class LineRenderBug {
 					public void paint(Graphics g_) {
 						Graphics2D g = (Graphics2D) g_;
 						globalDashPhase += 0.2;
+						float dashScale = 0.01f + (globalDashPhase % 100) / 100f;
 						Stroke thindashed = new BasicStroke(1.0f, // line width
 								/* cap style */BasicStroke.CAP_BUTT, /* join style, miter limit */BasicStroke.JOIN_BEVEL, 1.0f,
-								/* the dash pattern */new float[]{8.0f, 3.0f, 8.0f, 3.0f},
+								/* the dash pattern */new float[]{8.0f * dashScale, 3.0f * dashScale, 8.0f * dashScale, 3.0f * dashScale},
 								/* the dash globalDashPhase */globalDashPhase);
 						Stroke thindashed2 = new BasicStroke(1.0f, // line width
 								/* cap style */BasicStroke.CAP_BUTT, /* join style, miter limit */BasicStroke.JOIN_BEVEL, 1.0f,
-								/* the dash pattern */new float[]{5.0f, 3.0f, 5.0f, 3.0f},
+								/* the dash pattern */new float[]{5.0f * dashScale, 3.0f * dashScale, 5.0f * dashScale, 3.0f * dashScale},
 								/* the dash globalDashPhase */globalDashPhase);
 						g.setXORMode(Color.WHITE);
 						g.setStroke(thindashed);
@@ -45,8 +46,8 @@ public class LineRenderBug {
 						int y = (int) (globalDashPhase % height);
 						g.drawLine(0, y, width, y);
 
-						x = (int) (Math.random()*width);
-						y = (int) (Math.random()*height);
+						x = (int) (Math.random() * width);
+						y = (int) (Math.random() * height);
 						g.drawLine(0, y, width, y);
 						g.drawLine(x, 0, x, height);
 					}
